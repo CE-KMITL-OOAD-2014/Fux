@@ -1,0 +1,38 @@
+package service;
+
+import java.util.ArrayList;
+
+import model.GameRoom;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import JDBC.JDBCdataRoom;
+
+@RequestMapping(value = "/gameUI")
+public class UIController {
+	
+	@RequestMapping(value = "/lobby")
+//	public JSONObject getLobby(){
+	public String getLobby(){
+		JDBCdataRoom jdbcDataRoom = new JDBCdataRoom();
+		JSONObject json = new JSONObject();
+		ArrayList<GameRoom> roomlist = jdbcDataRoom.roomlist();
+		int i = 1;
+		String createrRoom = "";
+		String numPlayer = "";
+		for(GameRoom room :roomlist){
+			createrRoom = "creater"+i;
+			numPlayer = "numPlayer"+i;
+			try {
+				json.put(createrRoom, room.getCreater());
+				json.put(numPlayer, room.getNumPlayer());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			i++;
+		}
+		return json+"";
+	}
+}

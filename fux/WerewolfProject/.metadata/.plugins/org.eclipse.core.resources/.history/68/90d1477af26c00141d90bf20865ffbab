@@ -1,0 +1,22 @@
+package service;
+
+import java.util.ArrayList;
+
+import model.GameRoom;
+
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import JDBC.JDBCdataRoom;
+
+@RequestMapping(value = "/gameUI")
+public class UIController {
+	
+	@RequestMapping(value = "/lobby")
+	public JSONObject getLobby(){
+		JDBCdataRoom jdbcDataRoom = new JDBCdataRoom();
+		JSONObject json = new JSONObject();
+		ArrayList<GameRoom> roomlist = jdbcDataRoom.roomlist();
+		return null;
+	}
+}
